@@ -6,6 +6,13 @@ import { defineConfig, fontProviders } from "astro/config";
 import emdash from "emdash/astro";
 
 export default defineConfig({
+	 i18n: {
+    defaultLocale: 'zh',        // 默认主线语言改为国内中文
+    locales: ['zh', 'en'],      // 只保留中文和英文
+    routing: {
+      prefixDefault: false,     // 保证中文首页后面不带 /zh/
+    },
+  },
 	output: "server",
 	adapter: cloudflare(),
 	image: {
@@ -49,13 +56,6 @@ export default defineConfig({
 				],
 			},
 		}),
-		  i18n: {
-    defaultLocale: 'zh',        // 默认主线语言改为国内中文
-    locales: ['zh', 'en'],      // 只保留中文和英文
-    routing: {
-      prefixDefault: false,     // 保证中文首页后面不带 /zh/
-    },
-  },
 		emdash({
 			database: d1({ binding: "DB", session: "auto" }),
 			storage: r2({ binding: "MEDIA" }),
